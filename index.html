@@ -1683,20 +1683,59 @@ document.querySelectorAll('.flip-card').forEach(card => {
   });
 });
 
-function handleSubmit(e){
+async function handleSubmit(e){
   e.preventDefault();
-  const btn=e.target.querySelector('.submit-btn');
-  btn.textContent='Message Sent ✓';
-  btn.style.background='#1a7a3a';
-  btn.style.color='#fff';
-  btn.disabled=true;
-  setTimeout(()=>{
-    btn.textContent='Send My Brief →';
-    btn.style.background='var(--green)';
-    btn.style.color='#000';
-    btn.disabled=false;
-    e.target.reset();
-  },3000);
+  const form = e.target;
+  const btn = form.querySelector('.submit-btn');
+  const inputs = form.querySelectorAll('input,textarea');
+
+  // Gather field values
+  const fields = [...inputs];
+  const name        = fields[0].value;
+  const email       = fields[1].value;
+  const problem     = fields[2].value;
+  const information = fields[3].value;
+  const tools       = fields[4].value;
+  const goal        = fields[5].value;
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  inputs.forEach(i => i.disabled = true);
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, problem, information, tools, goal }),
+    });
+
+    if (res.ok) {
+      btn.textContent = 'Brief Sent ✓';
+      btn.style.background = '#1a5c1a';
+      btn.style.color = '#fff';
+      setTimeout(() => {
+        btn.textContent = 'Send My Brief →';
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+        inputs.forEach(i => i.disabled = false);
+        form.reset();
+      }, 3500);
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(err) {
+    btn.textContent = 'Something went wrong — try again';
+    btn.style.background = '#5c1a1a';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Send My Brief →';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.disabled = false;
+      inputs.forEach(i => i.disabled = false);
+    }, 3000);
+  }
 }
 </script>
 </body>
