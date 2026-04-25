@@ -42,6 +42,99 @@ body{
   overflow-x:hidden;
 }
 
+/* ─── PICF DIAGRAM ──────────── */
+.workflow-canvas{
+  width:100%;max-width:400px;
+  animation:fadeUp .8s .5s ease both;
+}
+.picf-diagram{
+  display:flex;flex-direction:column;align-items:stretch;gap:0;
+}
+.pd-node{
+  display:flex;align-items:center;gap:1rem;
+  background:#181818;
+  border:1px solid #252525;
+  border-radius:16px;
+  padding:1rem 1.4rem;
+  position:relative;
+  transition:border-color .4s,box-shadow .4s,background .4s;
+}
+.pd-node--large{padding:1.2rem 1.4rem;}
+.pd-node--output{
+  background:#0f2e0f;
+  border-color:#2a7a28;
+}
+.pd-node.active{
+  border-color:#3aaa35;
+  box-shadow:0 0 24px rgba(58,170,53,.2);
+  background:#111f11;
+}
+.pd-node--output.active{
+  border-color:#3aaa35;
+  box-shadow:0 0 32px rgba(58,170,53,.35);
+  background:#1a4a19;
+}
+.pd-letter{
+  width:40px;height:40px;min-width:40px;
+  background:linear-gradient(135deg,#3aaa35,#1a6e17);
+  color:#fff;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:1.2rem;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.3;
+  transition:opacity .4s,box-shadow .4s;
+}
+.pd-letter--check{font-size:1.1rem;}
+.pd-node.active .pd-letter{opacity:1;box-shadow:0 0 14px rgba(58,170,53,.5);}
+.pd-tag{
+  font-weight:700;
+  font-size:.9rem;
+  color:#f0f0f0;
+  margin-bottom:2px;
+  opacity:.4;
+  transition:opacity .4s;
+}
+.pd-sub{
+  font-size:.78rem;
+  color:#555;
+  transition:color .4s;
+}
+.pd-node.active .pd-tag{opacity:1;}
+.pd-node.active .pd-sub{color:#888;}
+
+/* connector */
+.pd-connector{
+  display:flex;justify-content:center;
+  padding:2px 0;
+  position:relative;
+}
+.pd-line{
+  width:2px;height:36px;
+  background:#1e1e1e;
+  border-radius:1px;
+  position:relative;
+  overflow:hidden;
+}
+.pd-dot{
+  width:2px;height:12px;
+  background:linear-gradient(to bottom,transparent,#3aaa35,transparent);
+  border-radius:1px;
+  position:absolute;
+  top:-12px;
+  transition:none;
+}
+.pd-connector.active .pd-line{background:#2a4a2a;}
+.pd-connector.active .pd-dot{
+  animation:dotFlow .6s ease forwards;
+}
+@keyframes dotFlow{
+  from{top:-12px;opacity:0;}
+  20%{opacity:1;}
+  to{top:36px;opacity:0;}
+}
+
 /* ─── SCROLLBAR ─────────────────── */
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--black)}
@@ -97,10 +190,15 @@ nav{
 /* ─── HERO ────────────────────── */
 #hero{
   min-height:100vh;
-  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:4rem;
   padding:120px max(5%, calc((100% - 1200px) / 2)) 80px;
   position:relative;overflow:hidden;
 }
+.hero-left{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;}
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;}
 .hero-bg-grid{
   position:absolute;inset:0;pointer-events:none;
   background-image:
@@ -223,6 +321,7 @@ nav{
   position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:8px;
   animation:fadeUp 1s .6s ease both;
+  z-index:2;
 }
 .hero-scroll span{font-size:.7rem;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase}
 .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--green),transparent)}
@@ -262,7 +361,7 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
 
 /* ─── ABOUT ─────────────── */
 #about{background:var(--surface);position:relative;overflow:hidden}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-grid{display:grid;grid-template-columns:1fr;max-width:780px;}
 .about-image-wrap{position:relative}
 .about-image-frame{
   background:var(--card);
@@ -602,6 +701,51 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
   transition:transform .2s,box-shadow .2s;
 }
 .submit-btn:hover{transform:scale(1.02);box-shadow:0 0 24px rgba(58,170,53,.35)}
+.picf-block{
+  margin-bottom:1.4rem;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.picf-block:focus-within{border-color:rgba(58,170,53,.4);}
+.picf-label{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.8rem 1rem .6rem;
+  border-bottom:1px solid var(--border);
+}
+.picf-letter{
+  width:26px;height:26px;min-width:26px;
+  background:linear-gradient(135deg,#3aaa35,#1a6e17);
+  color:#fff;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:.9rem;
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1;
+}
+.picf-title{
+  font-weight:700;
+  font-size:.85rem;
+  color:var(--text-primary);
+}
+.picf-hint{
+  font-size:.78rem;
+  color:var(--text-muted);
+  margin-left:auto;
+  text-align:right;
+  line-height:1.3;
+}
+.picf-block .form-textarea{
+  border:none;
+  border-radius:0;
+  background:transparent;
+  padding:.9rem 1rem;
+  font-size:.88rem;
+}
+.picf-block .form-textarea:focus{border:none;outline:none;}
 .form-note{
   font-size:.75rem;
   color:var(--text-muted);
@@ -671,6 +815,8 @@ footer{
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
   section{padding:70px 5%}
+  #hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
   .hero-headline{font-size:clamp(2.5rem,9vw,4rem)}
   .hero-stats{flex-direction:column;gap:1.5rem;margin-top:3rem}
 }
@@ -708,6 +854,7 @@ footer{
   <div class="hero-bg-glow"></div>
   <div class="hero-bg-glow2"></div>
 
+  <div class="hero-left">
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
     Available for new engagements
@@ -740,6 +887,81 @@ footer{
 
   </div>
 
+  </div><!-- end hero-left -->
+
+  <div class="hero-right">
+    <div class="workflow-canvas">
+      <div class="picf-diagram">
+
+        <!-- Node P -->
+        <div class="pd-node pd-node--large" id="pd-p">
+          <div class="pd-letter">P</div>
+          <div class="pd-info">
+            <div class="pd-tag">Problem</div>
+            <div class="pd-sub">What's slowing you down?</div>
+          </div>
+        </div>
+
+        <!-- Connector P→I -->
+        <div class="pd-connector" id="pd-conn-pi">
+          <div class="pd-line"><div class="pd-dot" id="dot-pi"></div></div>
+        </div>
+
+        <!-- Node I -->
+        <div class="pd-node" id="pd-i">
+          <div class="pd-letter">I</div>
+          <div class="pd-info">
+            <div class="pd-tag">Information</div>
+            <div class="pd-sub">Your business context</div>
+          </div>
+        </div>
+
+        <!-- Connector I→C -->
+        <div class="pd-connector" id="pd-conn-ic">
+          <div class="pd-line"><div class="pd-dot" id="dot-ic"></div></div>
+        </div>
+
+        <!-- Node C -->
+        <div class="pd-node" id="pd-c">
+          <div class="pd-letter">C</div>
+          <div class="pd-info">
+            <div class="pd-tag">Current Tools</div>
+            <div class="pd-sub">Stack you're working with</div>
+          </div>
+        </div>
+
+        <!-- Connector C→F -->
+        <div class="pd-connector" id="pd-conn-cf">
+          <div class="pd-line"><div class="pd-dot" id="dot-cf"></div></div>
+        </div>
+
+        <!-- Node F -->
+        <div class="pd-node" id="pd-f">
+          <div class="pd-letter">F</div>
+          <div class="pd-info">
+            <div class="pd-tag">Final Goal</div>
+            <div class="pd-sub">What success looks like</div>
+          </div>
+        </div>
+
+        <!-- Connector F→Output -->
+        <div class="pd-connector" id="pd-conn-out">
+          <div class="pd-line"><div class="pd-dot" id="dot-out"></div></div>
+        </div>
+
+        <!-- Output -->
+        <div class="pd-node pd-node--output" id="pd-out">
+          <div class="pd-letter pd-letter--check">✓</div>
+          <div class="pd-info">
+            <div class="pd-tag">Elah takes over</div>
+            <div class="pd-sub">System designed & built</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- end hero-right -->
+
   <div class="hero-scroll">
     <span>Scroll</span>
     <div class="scroll-line"></div>
@@ -752,26 +974,9 @@ footer{
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
-    <div class="about-image-wrap">
-      <div class="about-image-frame">
-        <div class="about-image-placeholder">
-          <div class="placeholder-icon">📷</div>
-          <span>Your photo here</span>
-        </div>
-      </div>
-      <div class="about-tag about-tag-role">
-        <div class="tag-title">Elah Mae Sayson</div>
-        <div class="tag-sub">AI Systems Architect</div>
-      </div>
-      <div class="about-tag about-tag-team">
-        <div class="tag-num">6<span style="font-size:1rem">yr</span></div>
-        <div class="tag-sub">VA → Architect<br>transformation</div>
-      </div>
-    </div>
-
     <div class="about-content">
       <div class="section-label">About</div>
-      <h2 class="section-title">Not just a VA.<br>A force multiplier.</h2>
+      <h2 class="section-title">Built from ops.<br>Wired for systems.</h2>
       <p class="section-desc">
         I'm Elah — a Philippines-based AI Systems Architect. I started out in virtual assistance, and over six years evolved into building the systems that make entire operations run leaner. The hands-on ops background is what makes the systems I build actually work in the real world.
       </p>
@@ -1110,9 +1315,9 @@ footer{
   <div class="contact-grid">
     <div class="contact-info">
       <div class="section-label">Contact</div>
-      <h2 class="section-title">Tell me what's<br>slowing you down.</h2>
+      <h2 class="section-title">Brief me.<br>I'll take it<br>from there.</h2>
       <p class="section-desc" style="margin-bottom:1.5rem">
-        Don't hold back on the details. The more context you give me about your problem, the more precisely I can help. I read every message personally.
+        I use the PICF formula — Problem, Information, Current tools, Final goal. It takes 5 minutes to fill out and means I can respond with a real plan, not just a "tell me more."
       </p>
       <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:2.5rem;line-height:1.7">
         Whether it's a broken process, a team drowning in manual tasks, or a system you know should exist but haven't built yet — bring it to me.
@@ -1143,10 +1348,12 @@ footer{
     </div>
 
     <div class="contact-form">
-      <div class="form-title">Start the conversation</div>
-      <div class="form-sub">I want to understand your situation fully — the messier the problem, the more interesting it is to me.</div>
+      <div class="form-title">Send me your brief</div>
+      <div class="form-sub">Use the PICF format below — the more specific you are, the faster I can tell you exactly how I can help.</div>
 
       <form onsubmit="handleSubmit(event)">
+
+        <!-- Identity -->
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Your Name</label>
@@ -1158,36 +1365,44 @@ footer{
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Business / Company</label>
-          <input type="text" class="form-input" placeholder="Your business name or 'Solo founder'"/>
+        <!-- P — Problem -->
+        <div class="picf-block">
+          <div class="picf-label">
+            <span class="picf-letter">P</span>
+            <span class="picf-title">Problem</span>
+            <span class="picf-hint">What's broken, slow, or costing you time?</span>
+          </div>
+          <textarea class="form-textarea" rows="3" placeholder="e.g. We're manually copying data from emails into a spreadsheet every day. It takes 2 hours and we keep making errors." required></textarea>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">What kind of help do you need?</label>
-          <select class="form-select">
-            <option value="" disabled selected>Select a category</option>
-            <option>AI Workflow Automation</option>
-            <option>Systems Architecture & Audit</option>
-            <option>Ops Consulting & Process Design</option>
-            <option>Not sure — I just know I have a problem</option>
-          </select>
+        <!-- I — Information & Context -->
+        <div class="picf-block">
+          <div class="picf-label">
+            <span class="picf-letter">I</span>
+            <span class="picf-title">Information & Context</span>
+            <span class="picf-hint">Tell me about your business and team size.</span>
+          </div>
+          <textarea class="form-textarea" rows="3" placeholder="e.g. We're a 3-person e-commerce brand selling supplements on Amazon and Shopify. I handle ops, my partner handles marketing." required></textarea>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Describe your situation in detail</label>
-          <textarea class="form-textarea" rows="5" placeholder="Walk me through what's happening. What's broken, what's slow, what are you doing manually that you wish you weren't? The more context, the better." required></textarea>
+        <!-- C — Current Tools -->
+        <div class="picf-block">
+          <div class="picf-label">
+            <span class="picf-letter">C</span>
+            <span class="picf-title">Current Tools</span>
+            <span class="picf-hint">What platforms, apps, or tools are you already using?</span>
+          </div>
+          <textarea class="form-textarea" rows="2" placeholder="e.g. Shopify, Amazon Seller Central, Google Sheets, Slack, Gmail, Klaviyo" required></textarea>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">What's your timeline?</label>
-          <select class="form-select">
-            <option value="" disabled selected>How urgent is this?</option>
-            <option>ASAP — this is a blocker</option>
-            <option>Within 2 weeks</option>
-            <option>This month</option>
-            <option>Planning ahead (1–3 months)</option>
-          </select>
+        <!-- F — Final Goal -->
+        <div class="picf-block">
+          <div class="picf-label">
+            <span class="picf-letter">F</span>
+            <span class="picf-title">Final Goal</span>
+            <span class="picf-hint">What does success look like when this is solved?</span>
+          </div>
+          <textarea class="form-textarea" rows="2" placeholder="e.g. Orders automatically logged in Sheets with zero manual input, and my team gets a Slack alert for each one." required></textarea>
         </div>
 
         <button type="submit" class="submit-btn">Send My Brief →</button>
@@ -1233,6 +1448,44 @@ document.querySelectorAll('.system-card,.service-card,.about-role-card').forEach
   el.style.transition='opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s';
   observer.observe(el);
 });
+
+// PICF diagram sequencer
+function runPICF(){
+  const steps = [
+    {node:'pd-p',   conn:null},
+    {node:null,     conn:'pd-conn-pi'},
+    {node:'pd-i',   conn:null},
+    {node:null,     conn:'pd-conn-ic'},
+    {node:'pd-c',   conn:null},
+    {node:null,     conn:'pd-conn-cf'},
+    {node:'pd-f',   conn:null},
+    {node:null,     conn:'pd-conn-out'},
+    {node:'pd-out', conn:null},
+  ];
+
+  let i = 0;
+  // reset all
+  document.querySelectorAll('.pd-node,.pd-connector').forEach(el=>el.classList.remove('active'));
+
+  function next(){
+    if(i >= steps.length){
+      // pause then restart
+      setTimeout(()=>{
+        document.querySelectorAll('.pd-node,.pd-connector').forEach(el=>el.classList.remove('active'));
+        i=0;
+        setTimeout(next, 600);
+      }, 2200);
+      return;
+    }
+    const s = steps[i];
+    if(s.node){ document.getElementById(s.node).classList.add('active'); }
+    if(s.conn){ document.getElementById(s.conn).classList.add('active'); }
+    i++;
+    setTimeout(next, s.conn ? 500 : 800);
+  }
+  next();
+}
+window.addEventListener('load', runPICF);
 
 function handleSubmit(e){
   e.preventDefault();
