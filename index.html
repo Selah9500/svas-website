@@ -921,22 +921,66 @@ footer{
 .mobile-nav a:hover{color:var(--green)}
 
 /* ─── RESPONSIVE ─────────── */
+/* ─── TABLET (≤900px) ───────── */
 @media(max-width:900px){
-  .about-grid{grid-template-columns:1fr}
-  .about-image-wrap{display:none}
   .contact-grid{grid-template-columns:1fr}
   .hero-stats{gap:2rem}
   .systems-header{flex-direction:column;align-items:flex-start}
   .form-row{grid-template-columns:1fr}
+  .about-body{grid-template-columns:1fr;gap:3rem}
+  .about-headline-row{margin-bottom:2rem}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .systems-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ─── MOBILE (≤768px) ─────── */
 @media(max-width:768px){
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
-  section{padding:70px 5%}
-  #hero{grid-template-columns:1fr;}
-  .hero-right{display:none;}
-  .hero-headline{font-size:clamp(2.5rem,9vw,4rem)}
-  .hero-stats{flex-direction:column;gap:1.5rem;margin-top:3rem}
+  section{padding:60px 5%}
+  #hero{
+    grid-template-columns:1fr;
+    padding-top:90px;
+    padding-bottom:60px;
+    min-height:auto;
+  }
+  .hero-left{align-items:flex-start}
+  .hero-right{display:none}
+  .hero-headline{font-size:clamp(2.2rem,10vw,3.5rem);line-height:.92}
+  .hero-sub{font-size:.95rem}
+  .hero-stats{
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:1.2rem;
+    margin-top:2rem;
+    padding-top:1.5rem;
+  }
+  .hero-stat-num{font-size:1.6rem}
+  .hero-badge{font-size:.7rem;padding:5px 12px 5px 8px}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:.8rem}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center;text-align:center}
+  .section-title{font-size:clamp(1.8rem,8vw,2.8rem)}
+  .services-grid{grid-template-columns:1fr}
+  .systems-grid{grid-template-columns:1fr}
+  .flip-card{height:240px}
+  .about-roles{gap:.8rem}
+  .about-role-card{padding:1rem 1.2rem}
+  .contact-form{padding:1.2rem}
+  .picf-label{flex-wrap:wrap;gap:.4rem}
+  .picf-hint{margin-left:0;text-align:left}
+  .n8n-canvas{gap:.5rem}
+  .hero-scroll{display:none}
+  footer{flex-direction:column;align-items:flex-start;gap:1rem;padding:30px 5%}
+  .footer-links{gap:1rem;flex-wrap:wrap}
+  .mobile-nav a{font-size:1.6rem}
+}
+
+/* ─── SMALL MOBILE (≤400px) ── */
+@media(max-width:400px){
+  .hero-headline{font-size:2rem}
+  .hero-stats{flex-direction:column;gap:1rem}
+  .flip-card{height:220px}
+  .contact-grid{gap:2rem}
 }
 </style>
 </head>
