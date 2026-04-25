@@ -78,9 +78,15 @@ body{
 .workflow-canvas{
   width:100%;max-width:400px;
   animation:fadeUp .8s .5s ease both;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  height:100%;
 }
 .picf-diagram{
   display:flex;flex-direction:column;align-items:stretch;gap:0;
+  justify-content:center;
+  height:100%;
 }
 .pd-node{
   display:flex;align-items:center;gap:1rem;
@@ -224,13 +230,13 @@ nav{
   min-height:100vh;
   display:grid;
   grid-template-columns:1fr 1fr;
-  align-items:center;
+  align-items:stretch;
   gap:2rem;
   padding:100px max(5%, calc((100% - 1200px) / 2)) 60px;
   position:relative;overflow:hidden;
 }
 .hero-left{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;}
-.hero-right{display:flex;align-items:center;justify-content:center;position:relative;}
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;align-self:center;}
 .hero-bg-grid{
   position:absolute;inset:0;pointer-events:none;
   background-image:
@@ -334,29 +340,12 @@ nav{
   border-top:1px solid var(--border);
   animation:fadeUp .8s .4s ease both;
 }
-.hero-stat-num{
-  font-family:var(--font-display);
-  font-weight:800;
-  font-size:2rem;
-  letter-spacing:-.04em;
-  color:var(--white);
-}
+
 .hero-stat-num span{color:var(--green)}
-.hero-stat-label{
-  font-size:.8rem;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  margin-top:4px;
-}
-.hero-scroll{
-  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  animation:fadeUp 1s .6s ease both;
-  z-index:2;
-}
+
+
 .hero-scroll span{font-size:.7rem;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase}
-.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--green),transparent)}
+
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
@@ -474,9 +463,31 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
   border-radius:var(--radius-md);
   padding:1.2rem 1.5rem;
   display:flex;align-items:flex-start;gap:1rem;
-  transition:border-color .3s;
+  transition:transform .35s cubic-bezier(.4,0,.2,1), border-color .3s, box-shadow .3s, background .3s;
+  cursor:default;
+  position:relative;
+  z-index:1;
+  transform-origin:center center;
 }
-.about-role-card:hover{border-color:rgba(58,170,53,.3)}
+.about-role-card:hover{
+  border-color:rgba(58,170,53,.5);
+  background:linear-gradient(135deg,#181818 0%,#1a2a1a 100%);
+  box-shadow:0 12px 40px rgba(58,170,53,.15), 0 0 0 1px rgba(58,170,53,.2);
+  transform:scale(1.04);
+  z-index:2;
+}
+.about-role-card .about-role-icon{
+  transition:transform .35s cubic-bezier(.4,0,.2,1), background .3s, border-color .3s;
+}
+.about-role-card:hover .about-role-icon{
+  transform:scale(1.1) rotate(-3deg);
+  background:rgba(58,170,53,.15);
+  border-color:rgba(58,170,53,.4);
+}
+.about-role-card:hover .about-role-title{color:#fff;}
+.about-role-card:hover .about-role-sub{color:rgba(255,255,255,.8);}
+.about-role-title{transition:color .3s;}
+.about-role-sub{transition:color .3s;}
 .about-role-icon{
   width:40px;height:40px;min-width:40px;
   background:var(--green-glow);
@@ -955,7 +966,7 @@ footer{
     margin-top:2rem;
     padding-top:1.5rem;
   }
-  .hero-stat-num{font-size:1.6rem}
+  
   .hero-badge{font-size:.7rem;padding:5px 12px 5px 8px}
   .hero-actions{flex-direction:column;align-items:flex-start;gap:.8rem}
   .btn-primary,.btn-secondary{width:100%;justify-content:center;text-align:center}
@@ -969,7 +980,7 @@ footer{
   .picf-label{flex-wrap:wrap;gap:.4rem}
   .picf-hint{margin-left:0;text-align:left}
   .n8n-canvas{gap:.5rem}
-  .hero-scroll{display:none}
+  
   footer{flex-direction:column;align-items:flex-start;gap:1rem;padding:30px 5%}
   .footer-links{gap:1rem;flex-wrap:wrap}
   .mobile-nav a{font-size:1.6rem}
@@ -1017,50 +1028,37 @@ footer{
   <div class="hero-bg-glow2"></div>
 
   <div class="hero-left">
-  <div class="hero-badge">
-    <div class="hero-badge-dot"></div>
-    Available for automation projects
-  </div>
-
-  <h1 class="hero-headline">
-    I build systems<br>
-    <span class="accent">that run</span><br>
-    <span class="line2">while you scale.</span>
-  </h1>
-  <!-- SEO context anchor -->
-  <p style="position:absolute;opacity:0;pointer-events:none;font-size:0">AI automation systems architect Philippines — n8n Make Zapier workflow automation for small teams and solopreneurs</p>
-
-  <p class="hero-sub">
-    Elah Sayson is an AI Systems Architect based in the Philippines who designs and builds custom workflow automation systems using n8n, Make, and Zapier. She helps solopreneurs and small teams eliminate manual tasks, reduce operational costs, and scale without hiring.
-  </p>
-
-  <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:2rem;letter-spacing:.01em">
-    Operating as <strong style="color:var(--text-secondary);font-weight:600">Sayson Virtual Assistance Services (SVAS)</strong>
-  </p>
-  <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Describe Your Problem →</a>
-    <a href="#systems" class="btn-secondary">See My Builds</a>
-  </div>
-
-  <div class="hero-stats">
-    <div>
-      <div class="hero-stat-num">10<span>+</span></div>
-      <div class="hero-stat-label">Automation Systems Built</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">6+<span>yrs</span></div>
-      <div class="hero-stat-label">VA → Systems Architect</div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Available for automation projects
     </div>
 
-  </div>
+    <h1 class="hero-headline">
+      I build systems<br>
+      <span class="accent">that run</span><br>
+      <span class="line2">while you scale.</span>
+    </h1>
+    <!-- SEO context anchor -->
+    <p style="position:absolute;opacity:0;pointer-events:none;font-size:0">AI automation systems architect Philippines — n8n Make Zapier workflow automation for small teams and solopreneurs</p>
 
+    <p class="hero-sub">
+      Elah Sayson is an AI Systems Architect based in the Philippines who designs and builds custom workflow automation systems using n8n, Make, and Zapier. She helps solopreneurs and small teams eliminate manual tasks, reduce operational costs, and scale without hiring.
+    </p>
+
+    <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:2rem;letter-spacing:.01em">
+      Operating as <strong style="color:var(--text-secondary);font-weight:600">Sayson Virtual Assistance Services (SVAS)</strong>
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Describe Your Problem →</a>
+      <a href="#systems" class="btn-secondary">See My Builds</a>
+    </div>
   </div><!-- end hero-left -->
 
   <div class="hero-right">
     <div class="workflow-canvas">
       <div class="picf-diagram">
 
-        <!-- Node P -->
         <div class="pd-node pd-node--large" id="pd-p">
           <div class="pd-letter">P</div>
           <div class="pd-info">
@@ -1069,12 +1067,10 @@ footer{
           </div>
         </div>
 
-        <!-- Connector P→I -->
         <div class="pd-connector" id="pd-conn-pi">
           <div class="pd-line"><div class="pd-dot" id="dot-pi"></div></div>
         </div>
 
-        <!-- Node I -->
         <div class="pd-node" id="pd-i">
           <div class="pd-letter">I</div>
           <div class="pd-info">
@@ -1083,12 +1079,10 @@ footer{
           </div>
         </div>
 
-        <!-- Connector I→C -->
         <div class="pd-connector" id="pd-conn-ic">
           <div class="pd-line"><div class="pd-dot" id="dot-ic"></div></div>
         </div>
 
-        <!-- Node C -->
         <div class="pd-node" id="pd-c">
           <div class="pd-letter">C</div>
           <div class="pd-info">
@@ -1097,12 +1091,10 @@ footer{
           </div>
         </div>
 
-        <!-- Connector C→F -->
         <div class="pd-connector" id="pd-conn-cf">
           <div class="pd-line"><div class="pd-dot" id="dot-cf"></div></div>
         </div>
 
-        <!-- Node F -->
         <div class="pd-node" id="pd-f">
           <div class="pd-letter">F</div>
           <div class="pd-info">
@@ -1111,12 +1103,10 @@ footer{
           </div>
         </div>
 
-        <!-- Connector F→Output -->
         <div class="pd-connector" id="pd-conn-out">
           <div class="pd-line"><div class="pd-dot" id="dot-out"></div></div>
         </div>
 
-        <!-- Output -->
         <div class="pd-node pd-node--output" id="pd-out">
           <div class="pd-letter pd-letter--check">✓</div>
           <div class="pd-info">
@@ -1128,11 +1118,7 @@ footer{
       </div>
     </div>
   </div><!-- end hero-right -->
-
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+</div>
 </section>
 
 <!-- DIVIDER -->
