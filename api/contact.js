@@ -78,40 +78,47 @@ Keep it specific to THEIR tools and problem. If they mention Shopify, use Shopif
   // STEP 2: Build the AI workflow HTML block
   // ─────────────────────────────────────────────────
   const workflowHtml = workflowSteps.map((s) => `
-    <div style="display:flex;gap:14px;align-items:flex-start;padding:12px 14px;background:#0f1f0f;border:1px solid rgba(58,170,53,0.2);border-radius:10px;margin-bottom:8px;">
-      <div style="background:linear-gradient(135deg,#3aaa35,#1a6e17);color:#fff;font-weight:800;font-size:13px;width:26px;height:26px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${s.step}</div>
-      <div style="flex:1;">
-        <div style="font-size:11px;color:#3aaa35;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">${s.trigger_or_action} · ${s.tool}</div>
-        <div style="font-size:13px;color:#ccc;line-height:1.5;">${s.description}</div>
-      </div>
-    </div>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#0f1f0f;border:1px solid rgba(58,170,53,0.2);border-radius:10px;margin-bottom:8px;">
+      <tr>
+        <td width="42" valign="top" style="padding:14px 0 14px 14px;">
+          <table cellpadding="0" cellspacing="0" border="0" style="background:#3aaa35;border-radius:6px;width:28px;height:28px;">
+            <tr>
+              <td align="center" valign="middle" style="color:#ffffff;font-family:Arial,sans-serif;font-weight:800;font-size:14px;line-height:28px;text-align:center;width:28px;height:28px;">${s.step}</td>
+            </tr>
+          </table>
+        </td>
+        <td valign="top" style="padding:14px 14px 14px 12px;">
+          <div style="font-family:Arial,sans-serif;font-size:11px;color:#3aaa35;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">${s.trigger_or_action} · ${s.tool}</div>
+          <div style="font-family:Arial,sans-serif;font-size:13px;color:#cccccc;line-height:1.5;">${s.description}</div>
+        </td>
+      </tr>
+    </table>
   `).join('');
 
   const aiSection = aiRecommendation && aiRecommendation.summary ? `
-    <div style="margin-top:32px;padding-top:28px;border-top:1px solid #1f1f1f;">
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(58,170,53,0.1);border:1px solid rgba(58,170,53,0.3);padding:5px 12px;border-radius:99px;margin-bottom:18px;">
-        <span style="width:6px;height:6px;background:#3aaa35;border-radius:50%;"></span>
-        <span style="font-size:10px;color:#3aaa35;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">AI-Generated Initial Analysis</span>
-      </div>
-
-      <h2 style="font-size:20px;font-weight:800;color:#fff;margin:0 0 12px;line-height:1.2;">Here's what I'm thinking, ${name.split(' ')[0]}.</h2>
-      <p style="font-size:14px;color:#bbb;line-height:1.7;margin:0 0 24px;">${aiRecommendation.summary}</p>
-
-      <h3 style="font-size:11px;color:#888;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:24px 0 12px;">Proposed Workflow</h3>
-      <div style="background:#0a0a0a;padding:18px;border-radius:12px;border:1px solid #1a1a1a;">
-        <div style="font-family:monospace;font-size:13px;color:#3aaa35;font-weight:700;margin-bottom:14px;">⚙️ ${aiRecommendation.workflow_name}</div>
-        ${workflowHtml}
-      </div>
-
-      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:180px;background:#0a0a0a;padding:14px 16px;border-radius:10px;border:1px solid #1a1a1a;">
-          <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;">Estimated Time Saved</div>
-          <div style="font-size:15px;color:#3aaa35;font-weight:700;">${aiRecommendation.estimated_time_saved}</div>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:32px;border-top:1px solid #1f1f1f;">
+      <tr><td style="padding-top:28px;">
+        <div style="display:inline-block;background:#0f2010;border:1px solid rgba(58,170,53,0.4);padding:5px 12px;border-radius:99px;margin-bottom:18px;">
+          <span style="font-family:Arial,sans-serif;font-size:10px;color:#3aaa35;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">⚡ AI-Generated Initial Analysis</span>
         </div>
-      </div>
-
-      <p style="font-size:13px;color:#999;line-height:1.7;margin:24px 0 0;">${aiRecommendation.next_steps}</p>
-    </div>
+        <h2 style="margin:0 0 12px;font-family:Arial,sans-serif;font-size:20px;font-weight:800;color:#ffffff;line-height:1.2;">Here's what I'm thinking, ${name.split(' ')[0]}.</h2>
+        <p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:14px;color:#bbbbbb;line-height:1.7;">${aiRecommendation.summary}</p>
+        <h3 style="margin:24px 0 12px;font-family:Arial,sans-serif;font-size:11px;color:#888888;font-weight:700;letter-spacing:2px;text-transform:uppercase;">Proposed Workflow</h3>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#0a0a0a;border-radius:12px;border:1px solid #1a1a1a;">
+          <tr><td style="padding:18px;">
+            <div style="font-family:Arial,sans-serif;font-size:14px;color:#3aaa35;font-weight:700;margin-bottom:14px;">⚙️ ${aiRecommendation.workflow_name}</div>
+            ${workflowHtml}
+          </td></tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:20px;background:#0a0a0a;border-radius:10px;border:1px solid #1a1a1a;">
+          <tr><td style="padding:14px 16px;">
+            <div style="font-family:Arial,sans-serif;font-size:10px;color:#888888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;">Estimated Time Saved</div>
+            <div style="font-family:Arial,sans-serif;font-size:15px;color:#3aaa35;font-weight:700;">${aiRecommendation.estimated_time_saved}</div>
+          </td></tr>
+        </table>
+        <p style="margin:24px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#999999;line-height:1.7;">${aiRecommendation.next_steps}</p>
+      </td></tr>
+    </table>
   ` : '';
 
   // ─────────────────────────────────────────────────
@@ -123,52 +130,78 @@ Keep it specific to THEIR tools and problem. If they mention Shopify, use Shopif
     { letter: 'C', label: 'Current Tools', value: tools },
     { letter: 'F', label: 'Final Goal', value: goal },
   ].map(b => `
-    <div style="margin-bottom:14px;background:#111;border-radius:10px;overflow:hidden;border:1px solid #1f1f1f;">
-      <div style="background:#161f16;padding:9px 14px;border-bottom:1px solid #1f1f1f;display:flex;align-items:center;gap:10px;">
-        <span style="background:linear-gradient(135deg,#3aaa35,#1a6e17);color:#fff;font-weight:800;font-size:11px;width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;">${b.letter}</span>
-        <span style="font-weight:700;font-size:12px;color:#fff;">${b.label}</span>
-      </div>
-      <div style="padding:11px 14px;font-size:13px;color:#bbb;line-height:1.6;">${b.value}</div>
-    </div>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:14px;background:#111111;border-radius:10px;border:1px solid #1f1f1f;">
+      <tr>
+        <td style="background:#161f16;padding:10px 14px;border-bottom:1px solid #1f1f1f;border-radius:10px 10px 0 0;">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td width="22" valign="middle">
+                <table cellpadding="0" cellspacing="0" border="0" style="background:#3aaa35;border-radius:5px;width:22px;height:22px;">
+                  <tr>
+                    <td align="center" valign="middle" style="color:#ffffff;font-family:Arial,sans-serif;font-weight:800;font-size:12px;line-height:22px;text-align:center;width:22px;height:22px;">${b.letter}</td>
+                  </tr>
+                </table>
+              </td>
+              <td valign="middle" style="padding-left:10px;">
+                <span style="font-family:Arial,sans-serif;font-weight:700;font-size:12px;color:#ffffff;">${b.label}</span>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 14px;font-family:Arial,sans-serif;font-size:13px;color:#bbbbbb;line-height:1.6;">${b.value}</td>
+      </tr>
+    </table>
   `).join('');
 
   const leadEmailHtml = `
-    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:640px;margin:0 auto;background:#0a0a0a;color:#f0f0f0;border-radius:14px;overflow:hidden;border:1px solid #1a1a1a;">
-
-      <div style="background:linear-gradient(135deg,#3aaa35,#1a6e17);padding:32px;">
-        <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.75);">Brief Received · SVAS</p>
-        <h1 style="margin:8px 0 0;font-size:26px;font-weight:800;color:#fff;line-height:1.2;">Thanks ${name.split(' ')[0]} — I've got your brief.</h1>
-      </div>
-
-      <div style="padding:28px 32px;">
-
-        <p style="font-size:14px;color:#bbb;line-height:1.7;margin:0 0 24px;">Here's a recap of what you sent over, plus an initial AI-generated analysis to give you a head start. We can refine this together once we connect.</p>
-
-        <h3 style="font-size:11px;color:#888;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 16px;">Your Brief (PICF)</h3>
-
-        ${picfBlocks}
-
-        ${aiSection}
-
-        <div style="margin-top:32px;padding:24px;background:linear-gradient(135deg,#0f1f0f,#0a0a0a);border:1px solid rgba(58,170,53,0.25);border-radius:12px;text-align:center;">
-          <h3 style="font-size:16px;font-weight:800;color:#fff;margin:0 0 6px;">Want to refine this?</h3>
-          <p style="font-size:13px;color:#999;margin:0 0 18px;line-height:1.6;">Book a free 30-minute call or just reply to this email. I read every message personally and respond within 24 hours.</p>
-
-          <a href="${BOOKING_LINK}" style="display:inline-block;background:linear-gradient(135deg,#3aaa35,#1a6e17);color:#fff;font-weight:700;font-size:13px;padding:11px 24px;border-radius:99px;text-decoration:none;margin-right:8px;">Book a Call →</a>
-          <a href="mailto:support@svasph.com?subject=Re: My SVAS Brief - ${encodeURIComponent(name)}" style="display:inline-block;background:transparent;border:1px solid #333;color:#ccc;font-weight:600;font-size:13px;padding:10px 22px;border-radius:99px;text-decoration:none;">Reply by Email</a>
-        </div>
-
-      </div>
-
-      <div style="padding:18px 32px;border-top:1px solid #1a1a1a;text-align:center;">
-        <p style="margin:0;font-size:11px;color:#555;line-height:1.6;">
-          <strong style="color:#888;">Elah Sayson</strong> · AI Systems Architect<br>
-          Sayson Virtual Assistance Services (SVAS) · Philippines<br>
-          <a href="https://svasph.com" style="color:#3aaa35;text-decoration:none;">svasph.com</a>
-        </p>
-      </div>
-
-    </div>
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin:0;padding:20px;background:#000000;font-family:Arial,Helvetica,sans-serif;">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:640px;margin:0 auto;background:#0a0a0a;border-radius:14px;border:1px solid #1a1a1a;">
+      <tr>
+        <td style="background:#3aaa35;padding:32px;border-radius:14px 14px 0 0;">
+          <p style="margin:0;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.85);">Brief Received · SVAS</p>
+          <h1 style="margin:8px 0 0;font-family:Arial,sans-serif;font-size:26px;font-weight:800;color:#ffffff;line-height:1.2;">Thanks ${name.split(' ')[0]} — I've got your brief.</h1>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:28px 32px;">
+          <p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:14px;color:#bbbbbb;line-height:1.7;">Here's a recap of what you sent over, plus an initial AI-generated analysis to give you a head start. We can refine this together once we connect.</p>
+          <h3 style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:11px;color:#888888;font-weight:700;letter-spacing:2px;text-transform:uppercase;">Your Brief (PICF)</h3>
+          ${picfBlocks}
+          ${aiSection}
+          <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:32px;background:#0f1f0f;border:1px solid rgba(58,170,53,0.25);border-radius:12px;">
+            <tr>
+              <td align="center" style="padding:24px;">
+                <h3 style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:16px;font-weight:800;color:#ffffff;">Want to refine this?</h3>
+                <p style="margin:0 0 18px;font-family:Arial,sans-serif;font-size:13px;color:#999999;line-height:1.6;">Book a free 30-minute call or just reply to this email. I read every message personally and respond within 24 hours.</p>
+                <table cellpadding="0" cellspacing="0" border="0" align="center"><tr>
+                  <td style="padding-right:6px;"><a href="${BOOKING_LINK}" style="display:inline-block;background:#3aaa35;color:#ffffff;font-family:Arial,sans-serif;font-weight:700;font-size:13px;padding:11px 24px;border-radius:99px;text-decoration:none;">Book a Call →</a></td>
+                  <td style="padding-left:6px;"><a href="mailto:support@svasph.com?subject=Re: My SVAS Brief - ${encodeURIComponent(name)}" style="display:inline-block;background:transparent;border:1px solid #333333;color:#cccccc;font-family:Arial,sans-serif;font-weight:600;font-size:13px;padding:10px 22px;border-radius:99px;text-decoration:none;">Reply by Email</a></td>
+                </tr></table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:18px 32px;border-top:1px solid #1a1a1a;border-radius:0 0 14px 14px;">
+          <p style="margin:0;font-family:Arial,sans-serif;font-size:11px;color:#555555;line-height:1.6;">
+            <strong style="color:#888888;">Elah Sayson</strong> · AI Systems Architect<br>
+            Sayson Virtual Assistance Services (SVAS) · Philippines<br>
+            <a href="https://svasph.com" style="color:#3aaa35;text-decoration:none;">svasph.com</a>
+          </p>
+        </td>
+      </tr>
+    </table>
+    </body>
+    </html>
   `;
 
   // ─────────────────────────────────────────────────
