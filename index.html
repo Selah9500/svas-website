@@ -3,7 +3,39 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Elah Sayson — AI Systems Architect</title>
+<title>Elah Sayson — AI Automation & Systems Architect | SVAS Philippines</title>
+<meta name="description" content="Elah Sayson is an AI Systems Architect based in the Philippines who designs and builds custom automation systems using n8n, Make, and Zapier for solopreneurs and small teams."/>
+<meta name="keywords" content="AI automation architect, workflow automation Philippines, n8n expert, Make automation, Zapier specialist, systems architect, business automation, AI workflow builder"/>
+<meta property="og:title" content="Elah Sayson — AI Automation & Systems Architect | SVAS"/>
+<meta property="og:description" content="I design and build automation systems that eliminate manual work for solopreneurs and small teams. n8n, Make, Zapier, and AI agents."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://svasph.com"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://svasph.com"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Elah Sayson",
+  "brand": {
+    "@type": "Brand",
+    "name": "Sayson Virtual Assistance Services"
+  },
+  "jobTitle": "AI Systems Architect",
+  "description": "Elah Sayson is an AI Systems Architect based in the Philippines who builds custom workflow automation systems using n8n, Make, Zapier, and AI agents for solopreneurs and small teams.",
+  "url": "https://svasph.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/elah-mae-sayson-pm42024/",
+    "https://www.upwork.com/freelancers/~011ab79f1fcdcad0da"
+  ],
+  "knowsAbout": ["Workflow Automation", "n8n", "Make", "Zapier", "AI Agents", "Systems Architecture", "Business Process Automation"],
+  "areaServed": "Worldwide",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "PH"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
@@ -354,14 +386,46 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
   max-width:540px;
   line-height:1.8;
 }
+/* ─── ABOUT LAYOUT ──────────── */
+#about{background:var(--surface);position:relative;overflow:hidden}
+.about-headline-row{margin-bottom:3rem;}
+.about-body{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:5rem;
+  align-items:flex-start;
+}
+.about-bio-col{}
+.about-right-col{display:flex;flex-direction:column;gap:1rem;}
+.about-tools-row{margin-top:.5rem;}
+.about-tools-label{
+  font-size:.72rem;font-weight:600;color:var(--text-muted);
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;
+}
+.tools-grid{display:flex;flex-wrap:wrap;gap:.5rem}
+.tool-chip{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-pill);
+  padding:5px 12px;
+  font-size:.78rem;
+  font-weight:500;
+  color:var(--text-secondary);
+  transition:border-color .2s,color .2s;
+}
+.tool-chip:hover{border-color:var(--green);color:var(--green)}
+@media(max-width:900px){
+  .about-body{grid-template-columns:1fr;}
+  .about-headline-row{margin-bottom:2rem;}
+}
+
+/* ─── DIVIDER ──────────────── */
 .divider{
   width:100%;height:1px;
   background:linear-gradient(to right,transparent,var(--border),transparent);
 }
 
-/* ─── ABOUT ─────────────── */
-#about{background:var(--surface);position:relative;overflow:hidden}
-.about-grid{display:grid;grid-template-columns:1fr;max-width:780px;}
+
 .about-image-wrap{position:relative}
 .about-image-frame{
   background:var(--card);
@@ -614,15 +678,15 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
 /* ─── CONTACT ─────────────── */
 #contact{position:relative;overflow:hidden}
 .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:6rem;align-items:flex-start}
-.contact-info{}
-.contact-links{display:flex;flex-direction:column;gap:.8rem;margin-top:2.5rem}
+.contact-info{padding-top:.5rem}
+.contact-links{display:flex;flex-direction:column;gap:.4rem;margin-top:1.5rem}
 .contact-link{
   display:flex;align-items:center;gap:1rem;
   color:var(--text-secondary);
   text-decoration:none;
   font-size:.9rem;
   transition:color .2s;
-  padding:.8rem 0;
+  padding:.55rem 0;
   border-bottom:1px solid var(--border);
 }
 .contact-link:hover{color:var(--green)}
@@ -639,22 +703,22 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius-xl);
-  padding:2.5rem;
+  padding:1.4rem;
 }
 .form-title{
   font-family:var(--font-display);
   font-weight:700;
-  font-size:1.4rem;
+  font-size:1.2rem;
   color:var(--white);
-  margin-bottom:.5rem;
+  margin-bottom:.3rem;
 }
 .form-sub{
-  font-size:.88rem;
+  font-size:.83rem;
   color:var(--text-secondary);
-  margin-bottom:2rem;
-  line-height:1.65;
+  margin-bottom:.9rem;
+  line-height:1.5;
 }
-.form-group{margin-bottom:1.2rem}
+.form-group{margin-bottom:.6rem}
 .form-label{
   display:block;
   font-size:.78rem;
@@ -671,9 +735,9 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius-sm);
-  padding:12px 16px;
+  padding:9px 14px;
   font-family:var(--font-body);
-  font-size:.9rem;
+  font-size:.88rem;
   color:var(--text-primary);
   outline:none;
   transition:border-color .2s;
@@ -682,7 +746,7 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus{border-color:rgba(58,170,53,.5)}
-.form-textarea{resize:vertical;min-height:120px;line-height:1.6}
+.form-textarea{resize:vertical;min-height:52px;line-height:1.6}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .submit-btn{
@@ -690,19 +754,19 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
   background:linear-gradient(135deg,#3aaa35,#1a6e17);
   color:#fff;
   font-family:var(--font-body);
-  font-size:.95rem;
+  font-size:.88rem;
   font-weight:700;
-  padding:15px 30px;
+  padding:11px 24px;
   border-radius:var(--radius-pill);
   border:none;
   cursor:pointer;
   letter-spacing:.03em;
-  margin-top:.5rem;
+  margin-top:.4rem;
   transition:transform .2s,box-shadow .2s;
 }
 .submit-btn:hover{transform:scale(1.02);box-shadow:0 0 24px rgba(58,170,53,.35)}
 .picf-block{
-  margin-bottom:1.4rem;
+  margin-bottom:.7rem;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius-md);
@@ -712,38 +776,38 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
 .picf-block:focus-within{border-color:rgba(58,170,53,.4);}
 .picf-label{
   display:flex;align-items:center;gap:.7rem;
-  padding:.8rem 1rem .6rem;
+  padding:.45rem 1rem .4rem;
   border-bottom:1px solid var(--border);
 }
 .picf-letter{
-  width:26px;height:26px;min-width:26px;
+  width:22px;height:22px;min-width:22px;
   background:linear-gradient(135deg,#3aaa35,#1a6e17);
   color:#fff;
   font-family:var(--font-display);
   font-weight:800;
-  font-size:.9rem;
-  border-radius:6px;
+  font-size:.78rem;
+  border-radius:5px;
   display:flex;align-items:center;justify-content:center;
   line-height:1;
 }
 .picf-title{
   font-weight:700;
-  font-size:.85rem;
+  font-size:.82rem;
   color:var(--text-primary);
 }
 .picf-hint{
-  font-size:.78rem;
+  font-size:.74rem;
   color:var(--text-muted);
   margin-left:auto;
   text-align:right;
-  line-height:1.3;
+  line-height:1.2;
 }
 .picf-block .form-textarea{
   border:none;
   border-radius:0;
   background:transparent;
-  padding:.9rem 1rem;
-  font-size:.88rem;
+  padding:.45rem 1rem;
+  font-size:.85rem;
 }
 .picf-block .form-textarea:focus{border:none;outline:none;}
 .form-note{
@@ -857,7 +921,7 @@ footer{
   <div class="hero-left">
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
-    Available for new engagements
+    Available for automation projects
   </div>
 
   <h1 class="hero-headline">
@@ -865,11 +929,16 @@ footer{
     <span class="accent">that run</span><br>
     <span class="line2">while you scale.</span>
   </h1>
+  <!-- SEO context anchor -->
+  <p style="position:absolute;opacity:0;pointer-events:none;font-size:0">AI automation systems architect Philippines — n8n Make Zapier workflow automation for small teams and solopreneurs</p>
 
   <p class="hero-sub">
-    I'm Elah — an AI Systems Architect based in the Philippines. I design and build automation systems that eliminate bottlenecks, cut manual work, and help small teams operate like they're twice the size.
+    Elah Sayson is an AI Systems Architect based in the Philippines who designs and builds custom workflow automation systems using n8n, Make, and Zapier. She helps solopreneurs and small teams eliminate manual tasks, reduce operational costs, and scale without hiring.
   </p>
 
+  <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:2rem;letter-spacing:.01em">
+    Operating as <strong style="color:var(--text-secondary);font-weight:600">Sayson Virtual Assistance Services (SVAS)</strong>
+  </p>
   <div class="hero-actions">
     <a href="#contact" class="btn-primary">Describe Your Problem →</a>
     <a href="#systems" class="btn-secondary">See My Builds</a>
@@ -881,7 +950,7 @@ footer{
       <div class="hero-stat-label">Automation Systems Built</div>
     </div>
     <div>
-      <div class="hero-stat-num">6<span>yrs</span></div>
+      <div class="hero-stat-num">6+<span>yrs</span></div>
       <div class="hero-stat-label">VA → Systems Architect</div>
     </div>
 
@@ -973,50 +1042,44 @@ footer{
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about-grid">
-    <div class="about-content">
-      <div class="section-label">About</div>
-      <h2 class="section-title">Built from ops.<br>Wired for systems.</h2>
+  <div class="about-headline-row">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Built from ops.<br>Wired for systems.</h2>
+  </div>
+
+  <div class="about-body">
+    <div class="about-bio-col">
       <p class="section-desc">
-        I'm Elah — a Philippines-based AI Systems Architect. I started out in virtual assistance, and over six years evolved into building the systems that make entire operations run leaner. The hands-on ops background is what makes the systems I build actually work in the real world.
+        Elah Sayson is a Philippines-based AI Systems Architect who specializes in building custom workflow automation systems for solopreneurs and small teams. With 6+ years of hands-on operations experience, she bridges the gap between business process knowledge and technical automation — designing systems that actually work in the real world.
       </p>
-      <p style="margin-top:1.2rem;color:var(--text-secondary);font-size:1rem;line-height:1.8">
-        The shift wasn't overnight — it was built through years of seeing the same bottlenecks repeat across businesses and deciding to fix them permanently. Today I lead customer operations at Nutratology and architect automation systems for founders who are done doing things manually.
+      <p style="margin-top:1rem;color:var(--text-secondary);font-size:.95rem;line-height:1.85">
+        Her background started in virtual assistance — managing operations, communications, and execution for growing businesses. Over time, she recognized a pattern: the same bottlenecks appeared everywhere. Manual data entry, broken handoffs, repetitive tasks consuming hours that should have been automated. Instead of patching symptoms, she learned to eliminate them permanently through intelligent system design.
       </p>
+      <p style="margin-top:1rem;color:var(--text-secondary);font-size:.95rem;line-height:1.85">
+        Today, Elah architects automation systems using n8n, Make, and Zapier — integrated with AI agents where intelligent decision-making is needed. Her work spans hiring systems, invoice processing, payroll automation, CRM workflows, inventory monitoring, and more. Every system is built for a real business problem and deployed in production.
+      </p>
+    </div>
 
-      <div class="about-roles">
-        <div class="about-role-card">
-          <div class="about-role-icon">⚙️</div>
-          <div>
-            <div class="about-role-title">AI Automation Architect</div>
-            <div class="about-role-sub">n8n · Zapier · Make · AI Agents · Custom Scripts</div>
-          </div>
-        </div>
-
-        <div class="about-role-card">
-          <div class="about-role-icon">🎯</div>
-          <div>
-            <div class="about-role-title">Operations Background</div>
-            <div class="about-role-sub">6 years in virtual ops — the foundation for everything I build</div>
-          </div>
+    <div class="about-right-col">
+      <div class="about-role-card">
+        <div class="about-role-icon">⚙️</div>
+        <div>
+          <div class="about-role-title">AI Workflow Automation</div>
+          <div class="about-role-sub">Custom automation systems built with n8n, Make, and Zapier — integrated with AI agents for intelligent, self-running workflows</div>
         </div>
       </div>
-
-      <div class="about-tools">
-        <div class="about-tools-label">Tools & Platforms</div>
-        <div class="tools-grid">
-          <span class="tool-chip">n8n</span>
-          <span class="tool-chip">Make</span>
-          <span class="tool-chip">Zapier</span>
-          <span class="tool-chip">Google Sheets</span>
-          <span class="tool-chip">Slack</span>
-          <span class="tool-chip">Klaviyo</span>
-          <span class="tool-chip">Hubstaff</span>
-          <span class="tool-chip">Typeform</span>
-          <span class="tool-chip">Granola AI</span>
-          <span class="tool-chip">Viktor AI</span>
-          <span class="tool-chip">Gamma AI</span>
-          <span class="tool-chip">Exercise.com</span>
+      <div class="about-role-card">
+        <div class="about-role-icon">🧱</div>
+        <div>
+          <div class="about-role-title">Systems Architecture</div>
+          <div class="about-role-sub">End-to-end process design — mapping workflows, identifying automation opportunities, and building systems that scale without adding headcount</div>
+        </div>
+      </div>
+      <div class="about-role-card">
+        <div class="about-role-icon">📍</div>
+        <div>
+          <div class="about-role-title">Based in the Philippines</div>
+          <div class="about-role-sub">Working with clients globally — solopreneurs, startups, and small teams who need real operational leverage, not just more hours</div>
         </div>
       </div>
     </div>
@@ -1031,10 +1094,10 @@ footer{
   <div class="systems-header">
     <div>
       <div class="section-label">Automation Portfolio</div>
-      <h2 class="section-title">Systems I've built<br>in the wild.</h2>
+      <h2 class="section-title">Automation systems<br>built & deployed.</h2>
     </div>
     <p style="max-width:340px;color:var(--text-secondary);font-size:.95rem;line-height:1.75">
-      These aren't templates. Every system below was architected for a real business problem, deployed, and running in production.
+      Every automation system below was custom-built for a real operational problem — not a template, not a demo. Each one is live, running, and saving hours every week.
     </p>
   </div>
 
@@ -1260,8 +1323,8 @@ footer{
 <section id="services">
   <div style="text-align:center;max-width:600px;margin:0 auto 1rem">
     <div class="section-label">What I Offer</div>
-    <h2 class="section-title">Built for founders<br>who move fast.</h2>
-    <p class="section-desc" style="margin:0 auto">Services designed for solopreneurs and small teams who need real leverage — not just more hours.</p>
+    <h2 class="section-title">Automation services<br>for lean teams.</h2>
+    <p class="section-desc" style="margin:0 auto">Custom automation and systems architecture services for solopreneurs and small teams. If you're doing something manually that a system could handle — that's where I come in.</p>
   </div>
 
   <div class="services-grid">
@@ -1269,7 +1332,7 @@ footer{
       <div class="service-badge">Most Popular</div>
       <div class="service-icon">⚡</div>
       <div class="service-title">AI Workflow Automation</div>
-      <div class="service-desc">I design, build, and deploy end-to-end automation systems tailored to your business processes using n8n, Make, or Zapier — integrated with AI agents where it makes sense.</div>
+      <div class="service-desc">Custom workflow automation built with n8n, Make, or Zapier — connected to your existing tools and integrated with AI agents for intelligent decision-making. From lead routing to invoice processing to payroll notifications, every system is scoped, built, and deployed to your exact process.</div>
       <ul class="service-list">
         <li>Custom n8n / Make / Zapier workflows</li>
         <li>AI agent integration</li>
@@ -1282,7 +1345,7 @@ footer{
     <div class="service-card">
       <div class="service-icon">🏗️</div>
       <div class="service-title">Systems Architecture</div>
-      <div class="service-desc">Before building, I map your entire operational workflow — identifying bottlenecks, redundancies, and automation opportunities — then present a clear architecture plan.</div>
+      <div class="service-desc">Before any automation is built, I audit your operations end-to-end — mapping workflows, identifying what should be automated first, and designing a system architecture that makes sense for your team size, tools, and growth stage.</div>
       <ul class="service-list">
         <li>Ops audit & workflow mapping</li>
         <li>Tech stack recommendations</li>
@@ -1294,7 +1357,7 @@ footer{
     <div class="service-card">
       <div class="service-icon">🧩</div>
       <div class="service-title">Ops Consulting & Support</div>
-      <div class="service-desc">When you need someone who understands operations at a systems level — not just task execution. I help map your processes, write SOPs, and identify what should be automated before we build anything.</div>
+      <div class="service-desc">For teams that need strategic ops support alongside automation. I help document processes, write SOPs, scope automation projects, and provide ongoing consulting so your operations stay clean as you grow.</div>
       <ul class="service-list">
         <li>Executive & ops support</li>
         <li>Email & calendar management</li>
@@ -1315,12 +1378,9 @@ footer{
   <div class="contact-grid">
     <div class="contact-info">
       <div class="section-label">Contact</div>
-      <h2 class="section-title">Brief me.<br>I'll take it<br>from there.</h2>
+      <h2 class="section-title">Work with<br>Elah Sayson.</h2>
       <p class="section-desc" style="margin-bottom:1.5rem">
-        I use the PICF formula — Problem, Information, Current tools, Final goal. It takes 5 minutes to fill out and means I can respond with a real plan, not just a "tell me more."
-      </p>
-      <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:2.5rem;line-height:1.7">
-        Whether it's a broken process, a team drowning in manual tasks, or a system you know should exist but haven't built yet — bring it to me.
+        Use the PICF brief below to describe your situation. The more specific you are, the faster I can come back with a real plan — not just a "tell me more." I read every submission personally and respond within 24 hours.
       </p>
       <div class="contact-links">
         <a href="https://www.linkedin.com/in/elah-mae-sayson-pm42024/" target="_blank" class="contact-link">
@@ -1353,56 +1413,51 @@ footer{
 
       <form onsubmit="handleSubmit(event)">
 
-        <!-- Identity -->
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Your Name</label>
+            <label class="form-label">Name</label>
             <input type="text" class="form-input" placeholder="Jane Smith" required/>
           </div>
           <div class="form-group">
-            <label class="form-label">Email Address</label>
+            <label class="form-label">Email</label>
             <input type="email" class="form-input" placeholder="jane@company.com" required/>
           </div>
         </div>
 
-        <!-- P — Problem -->
         <div class="picf-block">
           <div class="picf-label">
             <span class="picf-letter">P</span>
             <span class="picf-title">Problem</span>
-            <span class="picf-hint">What's broken, slow, or costing you time?</span>
+            <span class="picf-hint">What's broken or slow?</span>
           </div>
-          <textarea class="form-textarea" rows="3" placeholder="e.g. We're manually copying data from emails into a spreadsheet every day. It takes 2 hours and we keep making errors." required></textarea>
+          <textarea class="form-textarea" rows="2" placeholder="e.g. We manually copy data from emails into a spreadsheet every day — 2 hours of work, lots of errors." required></textarea>
         </div>
 
-        <!-- I — Information & Context -->
         <div class="picf-block">
           <div class="picf-label">
             <span class="picf-letter">I</span>
-            <span class="picf-title">Information & Context</span>
-            <span class="picf-hint">Tell me about your business and team size.</span>
+            <span class="picf-title">Information</span>
+            <span class="picf-hint">Your business context</span>
           </div>
-          <textarea class="form-textarea" rows="3" placeholder="e.g. We're a 3-person e-commerce brand selling supplements on Amazon and Shopify. I handle ops, my partner handles marketing." required></textarea>
+          <textarea class="form-textarea" rows="2" placeholder="e.g. 3-person e-commerce brand on Amazon & Shopify. I handle ops, partner handles marketing." required></textarea>
         </div>
 
-        <!-- C — Current Tools -->
         <div class="picf-block">
           <div class="picf-label">
             <span class="picf-letter">C</span>
             <span class="picf-title">Current Tools</span>
-            <span class="picf-hint">What platforms, apps, or tools are you already using?</span>
+            <span class="picf-hint">Apps you already use</span>
           </div>
-          <textarea class="form-textarea" rows="2" placeholder="e.g. Shopify, Amazon Seller Central, Google Sheets, Slack, Gmail, Klaviyo" required></textarea>
+          <textarea class="form-textarea" rows="1" placeholder="e.g. Shopify, Google Sheets, Slack, Gmail, Klaviyo" required></textarea>
         </div>
 
-        <!-- F — Final Goal -->
         <div class="picf-block">
           <div class="picf-label">
             <span class="picf-letter">F</span>
             <span class="picf-title">Final Goal</span>
-            <span class="picf-hint">What does success look like when this is solved?</span>
+            <span class="picf-hint">What does success look like?</span>
           </div>
-          <textarea class="form-textarea" rows="2" placeholder="e.g. Orders automatically logged in Sheets with zero manual input, and my team gets a Slack alert for each one." required></textarea>
+          <textarea class="form-textarea" rows="2" placeholder="e.g. Orders auto-logged in Sheets, team gets a Slack alert — zero manual input." required></textarea>
         </div>
 
         <button type="submit" class="submit-btn">Send My Brief →</button>
@@ -1423,7 +1478,7 @@ footer{
     <a href="https://www.linkedin.com/in/elah-mae-sayson-pm42024/" target="_blank">LinkedIn</a>
     <a href="https://www.upwork.com/freelancers/~011ab79f1fcdcad0da" target="_blank">Upwork</a>
   </div>
-  <div class="footer-copy">© 2025 Sayson Virtual Assistance Services · Philippines</div>
+  <div class="footer-copy">© 2025 Elah Sayson · Sayson Virtual Assistance Services (SVAS) · AI Systems Architect · Philippines</div>
 </footer>
 
 <script>
