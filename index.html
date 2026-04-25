@@ -672,12 +672,12 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
 }
 
 /* ─── SERVICES ─────────────── */
-#services{background:var(--surface)}
+#services{background:var(--surface);padding-top:80px;padding-bottom:80px;}
 .services-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:1.5rem;
-  margin-top:4rem;
+  margin-top:0;
 }
 .service-card{
   background:var(--card);
@@ -1485,10 +1485,10 @@ footer{
 
 <!-- SERVICES -->
 <section id="services">
-  <div style="text-align:center;max-width:600px;margin:0 auto 1rem">
+  <div style="text-align:center;max-width:760px;margin:0 auto 3rem">
     <div class="section-label">What I Offer</div>
-    <h2 class="section-title">Automation services<br>for lean teams.</h2>
-    <p class="section-desc" style="margin:0 auto">Custom automation and systems architecture services for solopreneurs and small teams. If you're doing something manually that a system could handle — that's where I come in.</p>
+    <h2 class="section-title" style="font-size:clamp(1.8rem,4vw,2.8rem);">Automation services for lean teams.</h2>
+    <p class="section-desc" style="margin:1rem auto 0;max-width:560px;">Custom automation and systems architecture services for solopreneurs and small teams. If you're doing something manually that a system could handle — that's where I come in.</p>
   </div>
 
   <div class="services-grid">
@@ -1573,7 +1573,7 @@ footer{
 
     <div class="contact-form">
       <div class="form-title">Send me your brief</div>
-      <div class="form-sub">Use the PICF format below — the more specific you are, the faster I can tell you exactly how I can help.</div>
+      <div class="form-sub">Use the PICF format below. Once you submit, AI analyzes your brief and sends you an initial automation recommendation within minutes — then we refine it together.</div>
 
       <form onsubmit="handleSubmit(event)">
 
@@ -1625,7 +1625,7 @@ footer{
         </div>
 
         <button type="submit" class="submit-btn">Send My Brief →</button>
-        <div class="form-note">I typically respond within 24 hours. No sales calls unless you want one.</div>
+        <div class="form-note">You'll get an AI-generated recommendation within minutes. I respond personally within 24 hours.</div>
       </form>
     </div>
   </div>
@@ -1740,7 +1740,7 @@ async function handleSubmit(e){
     });
 
     if (res.ok) {
-      btn.textContent = 'Brief Sent ✓';
+      btn.textContent = 'Brief Sent ✓ Check your email!';
       btn.style.background = '#1a5c1a';
       btn.style.color = '#fff';
       setTimeout(() => {
