@@ -510,100 +510,154 @@ section{padding:100px max(5%, calc((100% - 1200px) / 2))}
 }
 .systems-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
   gap:1.5rem;
 }
-.system-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  transition:transform .3s,border-color .3s,box-shadow .3s;
+
+/* FLIP CARDS */
+.flip-card{
+  height:320px;
+  perspective:1000px;
   cursor:pointer;
-  position:relative;
+  outline:none;
 }
-.system-card:hover{
-  transform:translateY(-4px);
-  border-color:rgba(58,170,53,.25);
-  box-shadow:0 12px 40px rgba(0,0,0,.5);
-}
-.system-card-preview{
-  height:180px;
-  background:var(--surface);
-  display:flex;align-items:center;justify-content:center;
+.flip-inner{
   position:relative;
+  width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+  border-radius:var(--radius-lg);
+}
+.flip-card:hover .flip-inner,
+.flip-card:focus .flip-inner,
+.flip-card.flipped .flip-inner{
+  transform:rotateY(180deg);
+}
+.flip-front,
+.flip-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  border-radius:var(--radius-lg);
+  display:flex;flex-direction:column;
+  border:1px solid var(--border);
   overflow:hidden;
 }
-.system-preview-grid{
+.flip-front{
+  background:var(--card);
+  padding:1.8rem;
+  align-items:flex-start;
+  justify-content:space-between;
+}
+.flip-back{
+  background:#080f08;
+  border-color:rgba(58,170,53,.3);
+  transform:rotateY(180deg);
+  justify-content:flex-end;
+  padding:0;
+}
+
+/* Media area (image or video) */
+.flip-media{
   position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(58,170,53,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(58,170,53,.04) 1px,transparent 1px);
-  background-size:24px 24px;
+  width:100%;height:100%;
+  object-fit:cover;
+  border-radius:var(--radius-lg);
+  opacity:.85;
+  transition:opacity .3s;
 }
-.system-preview-icon{
-  width:64px;height:64px;
-  background:var(--green-glow);
-  border:1px solid rgba(58,170,53,.2);
-  border-radius:var(--radius-md);
+.flip-card:hover .flip-media{opacity:1;}
+.flip-media-loom{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:none;
+  border-radius:var(--radius-lg);
+}
+.flip-media-placeholder{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.8rem;
+  background:linear-gradient(135deg,#0a180a,#111f11);
+}
+.flip-media-placeholder-icon{
+  width:52px;height:52px;
+  border:2px dashed rgba(58,170,53,.3);
+  border-radius:12px;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.8rem;
-  position:relative;z-index:1;
+  font-size:1.4rem;
 }
-.system-preview-label{
-  position:absolute;bottom:12px;right:12px;
-  background:var(--black);
-  border:1px solid var(--border);
-  border-radius:var(--radius-pill);
-  padding:4px 10px;
-  font-size:.7rem;
-  color:var(--green);
-  font-weight:600;
-  letter-spacing:.06em;
-  text-transform:uppercase;
+.flip-media-placeholder p{
+  font-size:.75rem;
+  color:var(--text-muted);
+  text-align:center;
+  line-height:1.5;
 }
-.system-upload-note{
-  position:absolute;top:12px;left:12px;
-  background:rgba(0,229,255,.1);
-  border:1px dashed rgba(58,170,53,.3);
-  border-radius:var(--radius-pill);
-  padding:4px 10px;
-  font-size:.65rem;
-  color:var(--green);
-  letter-spacing:.05em;
+.flip-media-placeholder .upload-options{
+  display:flex;gap:.5rem;margin-top:.3rem;
 }
-.system-card-body{padding:1.5rem}
-.system-card-num{
-  font-size:.72rem;
-  color:var(--green);
-  font-weight:600;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  margin-bottom:.6rem;
-}
-.system-card-title{
-  font-family:var(--font-display);
-  font-weight:700;
-  font-size:1.1rem;
-  color:var(--white);
-  line-height:1.2;
-  margin-bottom:.6rem;
-}
-.system-card-desc{
-  font-size:.85rem;
-  color:var(--text-secondary);
-  line-height:1.65;
-  margin-bottom:1.2rem;
-}
-.system-card-tags{display:flex;flex-wrap:wrap;gap:.4rem}
-.system-tag{
-  background:rgba(58,170,53,.07);
-  border:1px solid rgba(58,170,53,.15);
+.flip-media-placeholder .upload-opt{
+  background:rgba(58,170,53,.1);
+  border:1px solid rgba(58,170,53,.2);
   border-radius:var(--radius-pill);
   padding:3px 10px;
-  font-size:.72rem;
+  font-size:.68rem;
   color:var(--green);
-  font-weight:500;
+  font-weight:600;
+}
+
+/* Info overlay at the bottom of back */
+.flip-back-overlay{
+  position:relative;z-index:2;
+  background:linear-gradient(to top, rgba(5,15,5,.97) 0%, rgba(5,15,5,.92) 60%, transparent 100%);
+  padding:1.4rem 1.4rem 1.2rem;
+  border-radius:0 0 var(--radius-lg) var(--radius-lg);
+}
+.flip-num{
+  font-size:.7rem;
+  font-weight:700;
+  color:var(--green);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.flip-icon{
+  font-size:2.2rem;
+  margin:auto 0;
+}
+.flip-title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:1rem;
+  color:var(--white);
+  line-height:1.3;
+}
+.flip-hint{
+  font-size:.72rem;
+  color:var(--text-muted);
+  letter-spacing:.05em;
+  margin-top:.5rem;
+}
+.flip-back-title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:.88rem;
+  color:#ffffff;
+  line-height:1.3;
+  margin-bottom:.4rem;
+}
+.flip-desc{
+  font-size:.78rem;
+  color:rgba(255,255,255,.65);
+  line-height:1.6;
+}
+.flip-tags{
+  display:flex;flex-wrap:wrap;gap:.35rem;
+  margin-top:.7rem;
+}
+.flip-upload{
+  font-size:.68rem;
+  color:var(--text-muted);
+  margin-top:.5rem;
+  font-style:italic;
 }
 
 /* ─── SERVICES ─────────────── */
@@ -1103,212 +1157,292 @@ footer{
 
   <div class="systems-grid">
 
-    <!-- 1 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">🧠</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">n8n + AI</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 01</div>
-        <div class="system-card-title">AI Hiring Filter & Candidate Evaluator</div>
-        <div class="system-card-desc">Scans CVs against job descriptions, generates strengths/weaknesses analysis, ranks candidates, and notifies them via email or SMS based on their preferred channel.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">n8n</span>
-          <span class="system-tag">AI Agent</span>
-          <span class="system-tag">Email/SMS</span>
-          <span class="system-tag">HR</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">01</div>
+          <div class="flip-icon">🧠</div>
+          <div class="flip-title">AI Hiring Filter & Candidate Evaluator</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-01.jpg" alt="AI Hiring Filter & Candidate Evaluator"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">🧠</div>
+            <p>Add a screenshot or Loom<br>for System 01</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">01</div>
+            <div class="flip-back-title">AI Hiring Filter & Candidate Evaluator</div>
+            <div class="flip-desc">CV scanning, AI evaluation, strengths/weaknesses analysis, and multi-channel candidate notifications.</div>
+            <div class="flip-tags"><span class="system-tag">n8n</span><span class="system-tag">AI Agent</span><span class="system-tag">Email/SMS</span><span class="system-tag">HR</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 2 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">🧾</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">Make + Drive</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 02</div>
-        <div class="system-card-title">Invoice Processing & 3PL Expense Tracker</div>
-        <div class="system-card-desc">Scans 3PL invoices, extracts line items, flags unusual charges, records everything in a Google Sheet database, and files each invoice in organized Drive folders automatically.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">Make</span>
-          <span class="system-tag">Google Sheets</span>
-          <span class="system-tag">Google Drive</span>
-          <span class="system-tag">Finance</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">02</div>
+          <div class="flip-icon">🧾</div>
+          <div class="flip-title">Invoice Processing & 3PL Expense Tracker</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-02.jpg" alt="Invoice Processing & 3PL Expense Tracker"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">🧾</div>
+            <p>Add a screenshot or Loom<br>for System 02</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">02</div>
+            <div class="flip-back-title">Invoice Processing & 3PL Expense Tracker</div>
+            <div class="flip-desc">Scans 3PL invoices, extracts line items, flags unusual charges, and files everything automatically.</div>
+            <div class="flip-tags"><span class="system-tag">Make</span><span class="system-tag">Google Sheets</span><span class="system-tag">Google Drive</span><span class="system-tag">Finance</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 3 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">⏱️</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">Zapier + Hubstaff</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 03</div>
-        <div class="system-card-title">Team Timesheet & Workload Logger</div>
-        <div class="system-card-desc">Pulls timesheet reports from Hubstaff and records them into a Google Sheet database for team hour analysis, workload distribution, and capacity planning.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">Hubstaff</span>
-          <span class="system-tag">Google Sheets</span>
-          <span class="system-tag">Zapier</span>
-          <span class="system-tag">Operations</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">03</div>
+          <div class="flip-icon">⏱️</div>
+          <div class="flip-title">Team Timesheet & Workload Logger</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-03.jpg" alt="Team Timesheet & Workload Logger"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">⏱️</div>
+            <p>Add a screenshot or Loom<br>for System 03</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">03</div>
+            <div class="flip-back-title">Team Timesheet & Workload Logger</div>
+            <div class="flip-desc">Pulls Hubstaff timesheets into a Google Sheet database for workload analysis and capacity planning.</div>
+            <div class="flip-tags"><span class="system-tag">Hubstaff</span><span class="system-tag">Google Sheets</span><span class="system-tag">Zapier</span><span class="system-tag">Operations</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 4 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">💸</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">n8n + Drive</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 04</div>
-        <div class="system-card-title">Payroll Notification & Receipt Filing System</div>
-        <div class="system-card-desc">Sends personalized payroll notifications with attached receipts to each team member, then automatically files receipts inside each person's designated Drive folder.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">n8n</span>
-          <span class="system-tag">Google Drive</span>
-          <span class="system-tag">Email</span>
-          <span class="system-tag">Payroll</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">04</div>
+          <div class="flip-icon">💸</div>
+          <div class="flip-title">Payroll Notification & Receipt Filing System</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-04.jpg" alt="Payroll Notification & Receipt Filing System"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">💸</div>
+            <p>Add a screenshot or Loom<br>for System 04</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">04</div>
+            <div class="flip-back-title">Payroll Notification & Receipt Filing System</div>
+            <div class="flip-desc">Sends personalized payroll notifications with receipts, then files them in each member's Drive folder.</div>
+            <div class="flip-tags"><span class="system-tag">n8n</span><span class="system-tag">Google Drive</span><span class="system-tag">Email</span><span class="system-tag">Payroll</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 5 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">📦</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">n8n + Viktor AI</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 05</div>
-        <div class="system-card-title">Amazon Listing Monitor with AI Analysis</div>
-        <div class="system-card-desc">Scrapes Amazon listings on a daily schedule, extracts tracked KPIs, then sends Viktor AI's analysis of performance insights directly to a Slack channel.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">n8n</span>
-          <span class="system-tag">Viktor AI</span>
-          <span class="system-tag">Amazon</span>
-          <span class="system-tag">Slack</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">05</div>
+          <div class="flip-icon">📦</div>
+          <div class="flip-title">Amazon Listing Monitor with AI Analysis</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-05.jpg" alt="Amazon Listing Monitor with AI Analysis"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">📦</div>
+            <p>Add a screenshot or Loom<br>for System 05</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">05</div>
+            <div class="flip-back-title">Amazon Listing Monitor with AI Analysis</div>
+            <div class="flip-desc">Daily listing scrape → KPI extraction → Viktor AI analysis delivered straight to Slack.</div>
+            <div class="flip-tags"><span class="system-tag">n8n</span><span class="system-tag">Viktor AI</span><span class="system-tag">Amazon</span><span class="system-tag">Slack</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 6 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">🎙️</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">Granola + Gamma AI</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 06</div>
-        <div class="system-card-title">Meeting Notes → AI-Powered Presentation Pipeline</div>
-        <div class="system-card-desc">Granola records and summarizes meetings. An AI agent processes the transcript and feeds structured notes into Gamma AI to auto-generate beautiful presentation decks.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">Granola</span>
-          <span class="system-tag">Gamma AI</span>
-          <span class="system-tag">AI Agent</span>
-          <span class="system-tag">Productivity</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">06</div>
+          <div class="flip-icon">🎙️</div>
+          <div class="flip-title">Meeting Notes → AI Presentation Pipeline</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-06.jpg" alt="Meeting Notes → AI Presentation Pipeline"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">🎙️</div>
+            <p>Add a screenshot or Loom<br>for System 06</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">06</div>
+            <div class="flip-back-title">Meeting Notes → AI Presentation Pipeline</div>
+            <div class="flip-desc">Granola records meetings, AI processes the transcript, Gamma AI auto-generates the presentation deck.</div>
+            <div class="flip-tags"><span class="system-tag">Granola</span><span class="system-tag">Gamma AI</span><span class="system-tag">AI Agent</span><span class="system-tag">Productivity</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 7 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">📸</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">n8n + Sheets</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 07</div>
-        <div class="system-card-title">Screenshot Intelligence Logger</div>
-        <div class="system-card-desc">Processes information extracted from screenshots and automatically enters the parsed data into a Google Sheet database — eliminating manual data entry from visual sources.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">n8n</span>
-          <span class="system-tag">OCR/Vision</span>
-          <span class="system-tag">Google Sheets</span>
-          <span class="system-tag">Data</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">07</div>
+          <div class="flip-icon">📸</div>
+          <div class="flip-title">Screenshot Intelligence Logger</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-07.jpg" alt="Screenshot Intelligence Logger"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">📸</div>
+            <p>Add a screenshot or Loom<br>for System 07</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">07</div>
+            <div class="flip-back-title">Screenshot Intelligence Logger</div>
+            <div class="flip-desc">Extracts data from screenshots via vision AI and enters it directly into a Google Sheet database.</div>
+            <div class="flip-tags"><span class="system-tag">n8n</span><span class="system-tag">OCR/Vision</span><span class="system-tag">Google Sheets</span><span class="system-tag">Data</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 8 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">🛍️</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">Typeform + Klaviyo</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 08</div>
-        <div class="system-card-title">Customer Intake → Klaviyo Flow Router</div>
-        <div class="system-card-desc">Pulls customer details from Typeform submissions, updates their Klaviyo profile properties, and routes them into the correct product-specific email flow automatically.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">Typeform</span>
-          <span class="system-tag">Klaviyo</span>
-          <span class="system-tag">Make</span>
-          <span class="system-tag">CRM</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">08</div>
+          <div class="flip-icon">🛍️</div>
+          <div class="flip-title">Customer Intake → Klaviyo Flow Router</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-08.jpg" alt="Customer Intake → Klaviyo Flow Router"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">🛍️</div>
+            <p>Add a screenshot or Loom<br>for System 08</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">08</div>
+            <div class="flip-back-title">Customer Intake → Klaviyo Flow Router</div>
+            <div class="flip-desc">Typeform submissions → Klaviyo profile updates → automatic routing into the right email flow.</div>
+            <div class="flip-tags"><span class="system-tag">Typeform</span><span class="system-tag">Klaviyo</span><span class="system-tag">Make</span><span class="system-tag">CRM</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 9 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">🏋️</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">Exercise.com + Zapier</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 09</div>
-        <div class="system-card-title">Customer → App Enrollment Pipeline</div>
-        <div class="system-card-desc">Automatically enrolls new customers into the Exercise.com platform database upon purchase, giving them instant access to the branded app without manual onboarding steps.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">Exercise.com</span>
-          <span class="system-tag">Zapier</span>
-          <span class="system-tag">Onboarding</span>
-          <span class="system-tag">eComm</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">09</div>
+          <div class="flip-icon">🏋️</div>
+          <div class="flip-title">Customer → App Enrollment Pipeline</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-09.jpg" alt="Customer → App Enrollment Pipeline"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">🏋️</div>
+            <p>Add a screenshot or Loom<br>for System 09</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">09</div>
+            <div class="flip-back-title">Customer → App Enrollment Pipeline</div>
+            <div class="flip-desc">Auto-enrolls new customers into Exercise.com on purchase — instant app access, zero manual steps.</div>
+            <div class="flip-tags"><span class="system-tag">Exercise.com</span><span class="system-tag">Zapier</span><span class="system-tag">Onboarding</span><span class="system-tag">eComm</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 10 -->
-    <div class="system-card">
-      <div class="system-card-preview">
-        <div class="system-preview-grid"></div>
-        <div class="system-preview-icon">📬</div>
-        <div class="system-upload-note">+ Screenshot / Loom</div>
-        <div class="system-preview-label">n8n + Slack</div>
-      </div>
-      <div class="system-card-body">
-        <div class="system-card-num">System 10</div>
-        <div class="system-card-title">Multi-Marketplace Order Alert System</div>
-        <div class="system-card-desc">Sends incoming orders to Slack with marketplace source identified (Amazon, Shopify, etc.) so the team can track, discuss, and resolve order issues in threaded conversations.</div>
-        <div class="system-card-tags">
-          <span class="system-tag">n8n</span>
-          <span class="system-tag">Slack</span>
-          <span class="system-tag">Amazon</span>
-          <span class="system-tag">Fulfillment</span>
+    <div class="flip-card" tabindex="0">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-num">10</div>
+          <div class="flip-icon">📬</div>
+          <div class="flip-title">Multi-Marketplace Order Alert System</div>
+          <div class="flip-hint">Tap to see details</div>
+        </div>
+                <div class="flip-back">
+          <!-- REPLACE with: <img class="flip-media" src="system-10.jpg" alt="Multi-Marketplace Order Alert System"/> -->
+          <!-- OR: <iframe class="flip-media-loom" src="https://www.loom.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+          <div class="flip-media-placeholder">
+            <div class="flip-media-placeholder-icon">📬</div>
+            <p>Add a screenshot or Loom<br>for System 10</p>
+            <div class="upload-options">
+              <span class="upload-opt">📷 Image</span>
+              <span class="upload-opt">🎥 Loom</span>
+            </div>
+          </div>
+          <div class="flip-back-overlay">
+            <div class="flip-num">10</div>
+            <div class="flip-back-title">Multi-Marketplace Order Alert System</div>
+            <div class="flip-desc">Routes incoming orders to Slack with marketplace source tagged — team tracks and resolves in threads.</div>
+            <div class="flip-tags"><span class="system-tag">n8n</span><span class="system-tag">Slack</span><span class="system-tag">Amazon</span><span class="system-tag">Fulfillment</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1541,6 +1675,13 @@ function runPICF(){
   next();
 }
 window.addEventListener('load', runPICF);
+
+// Flip cards — click to toggle on mobile
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+});
 
 function handleSubmit(e){
   e.preventDefault();
